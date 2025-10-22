@@ -1,23 +1,84 @@
-﻿import { defineConfig } from '@ldesign/builder'
+﻿/**
+ * @ldesign/form 构建配置
+ * 
+ * 框架无关的表单管理库，支持 Vue 3、Lit、React 适配器
+ * 使用 vueLibrary 预设作为基础
+ */
 
-export default defineConfig({
-  // Output format config
-  output: {
-    format: ['esm', 'cjs', 'umd']
-  },
+import { defineConfig, vueLibrary } from '@ldesign/builder'
 
-  // 鐢熸垚绫诲瀷澹版槑鏂囦欢
-  dts: true,
+export default defineConfig(
+  vueLibrary({
+    // UMD 构建配置
+    umd: {
+      enabled: true,
+      name: 'LDesignForm', // UMD 全局变量名
+    },
 
-  // 鐢熸垚 source map
-  sourcemap: true,
+    // 排除非生产代码
+    exclude: [
+      '**/examples/**',
+      '**/example/**',
+      '**/__tests__/**',
+      '**/*.test.*',
+      '**/*.spec.*',
+      '**/demo/**',
+      '**/dev/**',
+      '**/docs/**',
+      '**/tests/**',
+      '**/e2e/**',
+      '**/scripts/**',
+      '**/summary/**',
+      '**/playwright.config.*',
+      '**/vite.config.*',
+      '**/vitest.config.*'
+    ],
 
-  // 娓呯悊杈撳嚭鐩綍
-  clean: true,
+    // 外部依赖
+    external: [
+      'vue', // Vue 3 集成
+      'lit', // Lit 适配器
+      'lodash-es' // 工具库
+    ],
 
-  // 涓嶅帇缂╀唬鐮侊紙寮€鍙戦樁娈碉級
-  minify: false
+    // 全局变量映射
+    globals: {
+      'vue': 'Vue',
+      'lit': 'Lit',
+      'lodash-es': '_'
+    },
 
-  // external銆乬lobals銆乴ibraryType銆乫ormats銆乸lugins 绛夐厤缃皢鐢?@ldesign/builder 鑷姩妫€娴嬪拰鐢熸垚
-})
+    // Vue 配置
+    vue: {
+      version: 3,
+      onDemand: false,
+      jsx: {
+        enabled: false // Form 不使用 JSX
+      },
+      template: {
+        precompile: true
+      }
+    },
 
+    // 样式处理配置（Less）
+    style: {
+      extract: true,
+      minimize: true,
+      autoprefixer: true,
+      preprocessor: 'less'
+    },
+
+    // TypeScript 配置
+    typescript: {
+      declaration: true,
+      target: 'ES2020',
+      module: 'ESNext'
+    },
+
+    // 性能优化
+    performance: {
+      treeshaking: true,
+      minify: false
+    }
+  })
+)
