@@ -222,35 +222,35 @@ defineExpose({
   position: relative;
   display: inline-block;
   width: 100%;
-  background-color: #fff;
-  border: 1px solid #d9d9d9;
-  border-radius: 4px;
-  transition: all 0.3s;
+  background-color: var(--color-bg-container);
+  border: var(--size-border-width-thin) solid var(--color-border-input);
+  border-radius: var(--size-radius-sm);
+  transition: all var(--size-duration-normal);
 
   &:hover:not(.is-disabled) {
-    border-color: #722ED1;
+    border-color: var(--color-border-input-hover);
   }
 
   &.is-focused {
-    border-color: #722ED1;
-    box-shadow: 0 0 0 2px rgba(114, 46, 209, 0.1);
+    border-color: var(--color-border-input-focus);
+    box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-primary-default) 10%, transparent);
   }
 
   &.is-error {
-    border-color: #ff4d4f;
+    border-color: var(--color-border-input-error);
 
     &:hover,
     &.is-focused {
-      border-color: #ff4d4f;
+      border-color: var(--color-border-input-error);
     }
 
     &.is-focused {
-      box-shadow: 0 0 0 2px rgba(255, 77, 79, 0.1);
+      box-shadow: 0 0 0 2px color-mix(in srgb, var(--color-danger-default) 10%, transparent);
     }
   }
 
   &.is-disabled {
-    background-color: #f5f5f5;
+    background-color: var(--color-bg-component-disabled);
     cursor: not-allowed;
 
     .ldesign-textarea {
@@ -261,22 +261,22 @@ defineExpose({
 
 .ldesign-textarea {
   width: 100%;
-  padding: 4px 11px;
-  font-size: 14px;
-  line-height: 1.5715;
-  color: rgba(0, 0, 0, 0.85);
+  padding: var(--size-spacing-xs) var(--size-spacing-lg);
+  font-size: var(--size-font-base);
+  line-height: var(--size-line-normal);
+  color: var(--color-text-primary);
   background: transparent;
   border: none;
   outline: none;
   resize: vertical;
-  font-family: inherit;
+  font-family: var(--size-font-family);
 
   &::placeholder {
-    color: #bfbfbf;
+    color: var(--color-text-placeholder);
   }
 
   &:disabled {
-    color: rgba(0, 0, 0, 0.25);
+    color: var(--color-text-disabled);
     resize: none;
   }
 }
@@ -285,34 +285,34 @@ defineExpose({
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-top: 4px;
-  font-size: 12px;
+  margin-top: var(--size-spacing-xs);
+  font-size: var(--size-font-sm);
 }
 
 .ldesign-textarea-count {
-  color: rgba(0, 0, 0, 0.45);
+  color: var(--color-text-tertiary);
 }
 
 .ldesign-textarea-actions {
   .ldesign-btn-link {
     padding: 0;
-    font-size: 12px;
-    color: #722ED1;
+    font-size: var(--size-font-sm);
+    color: var(--color-primary-default);
     background: none;
     border: none;
     cursor: pointer;
-    transition: color 0.3s;
+    transition: color var(--size-duration-normal);
 
     &:hover {
-      color: #5c24a8;
+      color: var(--color-primary-hover);
     }
   }
 }
 
 .ldesign-markdown-preview {
-  margin-top: 12px;
-  padding: 12px;
-  background-color: #f5f5f5;
+  margin-top: var(--size-spacing-lg);
+  padding: var(--size-spacing-lg);
+  background-color: var(--color-bg-component);
   border-radius: 4px;
   font-size: 14px;
   line-height: 1.5715;
