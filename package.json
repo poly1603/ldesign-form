@@ -61,7 +61,6 @@
     "format": "prettier --write \"src/**/*.{ts,vue,js,json,md}\"",
     "format:check": "prettier --check \"src/**/*.{ts,vue,js,json,md}\"",
     "clean": "rimraf dist",
-    "prepublishOnly": "pnpm run clean && pnpm run build",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:preview": "vitepress preview docs",
