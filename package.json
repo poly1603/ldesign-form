@@ -1,5 +1,6 @@
 {
-  "name": "@ldesign/form",
+  "name": "ldesign-form-monorepo",
+  "private": true,
   "version": "1.0.0",
   "description": "LDesign 表单插件系统 - 框架无关的表单管理库，提供完整的表单状态管理、验证、数据绑定等功能，并内置 Vue 3 适配器",
   "keywords": [
@@ -45,8 +46,11 @@
     "dist"
   ],
   "scripts": {
-    "dev": "vite",
-    "build": "ldesign-builder build",
+    "dev": "pnpm --filter form-playground dev",
+    "dev:playground": "pnpm --filter form-playground dev",
+    "build:core": "pnpm --filter @ldesign/form-core build",
+    "build:vue": "pnpm --filter @ldesign/form-vue build",
+    "build": "pnpm build:core && pnpm build:vue",
     "build:lib": "vite build",
     "build:types": "vue-tsc --declaration --emitDeclarationOnly",
     "build:watch": "vite build --watch",
@@ -79,9 +83,6 @@
     "lodash-es": "^4.17.21"
   },
   "devDependencies": {
-    "@ldesign/builder": "workspace:*",
-    "@ldesign/launcher": "workspace:*",
-    "@ldesign/shared": "workspace:*",
     "@types/lodash-es": "^4.17.12",
     "@types/node": "^20.0.0",
     "@typescript-eslint/eslint-plugin": "^6.0.0",

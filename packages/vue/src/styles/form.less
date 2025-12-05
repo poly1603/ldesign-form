@@ -1,0 +1,414 @@
+/**
+ * LDesign Form 样式
+ */
+
+// 变量
+@form-prefix: ldesign-form;
+@primary-color: #0052d9;
+@error-color: #e34d59;
+@text-color: #333;
+@text-color-secondary: #666;
+@border-color: #dcdcdc;
+@bg-color: #fff;
+@disabled-color: #c5c5c5;
+@font-size-base: 14px;
+@font-size-small: 12px;
+@line-height: 1.5;
+@border-radius: 4px;
+@transition-duration: 0.2s;
+@space-xs: 4px;
+@space-sm: 8px;
+@space-md: 12px;
+@space-lg: 16px;
+@space-xl: 24px;
+
+// 表单容器
+.@{form-prefix} {
+  --form-cols: 40;
+  --form-gutter: 16px;
+  --form-label-space: 8px;
+  --form-inner-space: 8px;
+  --form-label-padding: 12px;
+  --form-padding: 0;
+  --form-colon-width: 8px;
+  
+  box-sizing: border-box;
+  font-size: @font-size-base;
+  line-height: @line-height;
+  color: @text-color;
+  padding: var(--form-padding);
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
+
+  // 头部
+  &__header {
+    margin-bottom: @space-lg;
+    padding-bottom: @space-md;
+    border-bottom: 1px solid @border-color;
+  }
+
+  // 内容区
+  &__content {
+    width: 100%;
+  }
+
+  // 分组
+  &__group {
+    margin-bottom: @space-lg;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    &.has-more {
+      position: relative;
+    }
+  }
+
+  // 分组标题
+  &__title {
+    margin: 0 0 @space-md;
+    padding: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: @text-color;
+  }
+
+  // 预览区域
+  &__preview,
+  &__more {
+    width: 100%;
+  }
+
+  // 行
+  &__row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    gap: var(--form-gutter);
+    margin-bottom: var(--form-gutter);
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  // 列
+  &__col {
+    flex: 0 0 calc(var(--form-col) / var(--form-cols) * 100%);
+    max-width: calc(var(--form-col) / var(--form-cols) * 100%);
+    min-width: 0;
+
+    &.is-adjust {
+      flex: 0 0 calc(var(--form-adjust-col) / var(--form-cols) * 100%);
+      max-width: calc(var(--form-adjust-col) / var(--form-cols) * 100%);
+    }
+
+    &.is-button {
+      display: flex;
+      align-items: flex-end;
+    }
+
+    &.is-label-hidden {
+      .@{form-prefix}-item__label {
+        display: none;
+      }
+    }
+
+    &.is-readonly,
+    &.is-static {
+      .@{form-prefix}-item__control {
+        input,
+        textarea,
+        select {
+          background-color: transparent;
+          border-color: transparent;
+          cursor: default;
+        }
+      }
+    }
+  }
+
+  // 按钮区域
+  &__buttons {
+    display: flex;
+    align-items: center;
+    gap: @space-sm;
+    width: 100%;
+
+    &.is-inline {
+      justify-content: flex-end;
+    }
+
+    &.is-block {
+      justify-content: flex-start;
+      padding-top: @space-md;
+    }
+  }
+
+  &__btn {
+    &--submit,
+    &--reset,
+    &--expand {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: @space-sm @space-lg;
+      font-size: @font-size-base;
+      line-height: @line-height;
+      border-radius: @border-radius;
+      cursor: pointer;
+      transition: all @transition-duration;
+      border: 1px solid transparent;
+    }
+
+    &--submit {
+      background-color: @primary-color;
+      color: #fff;
+      border-color: @primary-color;
+
+      &:hover {
+        background-color: darken(@primary-color, 10%);
+      }
+    }
+
+    &--reset {
+      background-color: @bg-color;
+      color: @text-color;
+      border-color: @border-color;
+
+      &:hover {
+        border-color: @primary-color;
+        color: @primary-color;
+      }
+    }
+
+    &--expand {
+      background-color: transparent;
+      color: @primary-color;
+      border: none;
+      padding: @space-xs @space-sm;
+
+      &:hover {
+        color: darken(@primary-color, 10%);
+      }
+    }
+  }
+
+  // 底部
+  &__footer {
+    margin-top: @space-lg;
+    padding-top: @space-md;
+    border-top: 1px solid @border-color;
+  }
+
+  // 变体样式
+  &.is-variant--document {
+    .@{form-prefix}-item__label {
+      background-color: #f5f5f5;
+      padding: @space-sm var(--form-label-padding);
+    }
+  }
+
+  // 状态样式
+  &.is-readonly,
+  &.is-static {
+    pointer-events: none;
+  }
+
+  &.is-disabled {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  // 设备适配
+  &.is-device--mobile {
+    .@{form-prefix}__row {
+      flex-direction: column;
+    }
+
+    .@{form-prefix}__col {
+      flex: 0 0 100%;
+      max-width: 100%;
+    }
+
+    .@{form-prefix}-item {
+      flex-direction: column;
+
+      &__label {
+        width: 100% !important;
+        text-align: left;
+        margin-bottom: @space-xs;
+      }
+    }
+  }
+}
+
+// 表单项
+.@{form-prefix}-item {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+
+  // 标签
+  &__label {
+    flex-shrink: 0;
+    width: var(--form-label-width, auto);
+    padding-right: var(--form-label-space);
+    line-height: 32px;
+    color: @text-color;
+    text-align: right;
+  }
+
+  &__required {
+    color: @error-color;
+    margin-right: 2px;
+  }
+
+  &__label-text {
+    display: inline;
+  }
+
+  &__colon {
+    margin-left: 2px;
+  }
+
+  // 内容
+  &__content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  &__control {
+    width: 100%;
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: @space-sm @space-md;
+      font-size: @font-size-base;
+      line-height: @line-height;
+      color: @text-color;
+      background-color: @bg-color;
+      border: 1px solid @border-color;
+      border-radius: @border-radius;
+      transition: border-color @transition-duration;
+      outline: none;
+
+      &:focus {
+        border-color: @primary-color;
+      }
+
+      &:disabled {
+        background-color: #f5f5f5;
+        color: @disabled-color;
+        cursor: not-allowed;
+      }
+
+      &::placeholder {
+        color: @text-color-secondary;
+      }
+    }
+
+    textarea {
+      min-height: 80px;
+      resize: vertical;
+    }
+  }
+
+  // 错误信息
+  &__error {
+    margin-top: @space-xs;
+    font-size: @font-size-small;
+    color: @error-color;
+    line-height: 1.4;
+  }
+
+  // 帮助信息
+  &__help {
+    margin-top: @space-xs;
+    font-size: @font-size-small;
+    color: @text-color-secondary;
+    line-height: 1.4;
+  }
+
+  // 额外信息
+  &__extra {
+    margin-top: @space-xs;
+    font-size: @font-size-small;
+    color: @text-color-secondary;
+    line-height: 1.4;
+  }
+
+  // 状态
+  &.is-required {
+    .@{form-prefix}-item__label {
+      &::before {
+        content: '';
+      }
+    }
+  }
+
+  &.is-error {
+    .@{form-prefix}-item__control {
+      input,
+      textarea,
+      select {
+        border-color: @error-color;
+
+        &:focus {
+          border-color: @error-color;
+        }
+      }
+    }
+  }
+
+  &.is-validating {
+    .@{form-prefix}-item__control {
+      opacity: 0.7;
+    }
+  }
+
+  // 标签对齐
+  &.is-label-left {
+    .@{form-prefix}-item__label {
+      text-align: left;
+    }
+  }
+
+  &.is-label-right {
+    .@{form-prefix}-item__label {
+      text-align: right;
+    }
+  }
+
+  &.is-label-top {
+    flex-direction: column;
+
+    .@{form-prefix}-item__label {
+      width: 100%;
+      text-align: left;
+      padding-right: 0;
+      margin-bottom: @space-xs;
+    }
+  }
+}
+
+// 过渡动画
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity @transition-duration, transform @transition-duration;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+  transform: translateY(-4px);
+}
